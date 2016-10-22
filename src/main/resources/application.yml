@@ -1,0 +1,19 @@
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+  thymeleaf:
+    cache: false
+
+    spring:
+      datasource:
+        platform: postgresql
+        url: jdbc:postgresql://ec2-54-75-228-51.eu-west-1.compute.amazonaws.com/d461tq9mdpp5dq
+        username: rteyohppiivqca
+        password: nPgluB-QnQgB7xv_FfKyDqRGHK
+        driverClassName: org.postgresql.Driver
+
+
+      jpa:
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect

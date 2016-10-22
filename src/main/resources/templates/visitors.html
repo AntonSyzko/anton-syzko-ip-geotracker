@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+       xmlns:pages="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Geolocation and Weather by IP Address</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8;width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css"/>
+    <script th:inline="javascript" src="//code.jquery.com/jquery.js"></script>
+    <script th:inline="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:inline="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!--geo-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQU8QZwcbZBtiUWbFkLJAysT9_wWuo68s"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.googlemap/1.5/jquery.googlemap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.googlemap/1.5/jquery.googlemap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script  src="//code.jquery.com/jquery.js"></script>-->
+    <style>
+        body {
+            padding-top: 6%;
+        }
+        @media (max-width: 979px) {
+            body {
+                padding-top: 0px;
+            }
+        }
+        #googleMap2{
+            display: none;
+            width:100%;
+            padding-top: 5%;
+            /*padding-left: 5%;*/
+            /*padding-right: 50%;*/
+
+
+        }
+
+        #mainweather{
+            width:50%;
+            background-color:#fff;
+            margin:0 auto;
+            text-align: center;
+            padding:10px 0px 10px 0px;
+            padding-top: 5%;
+
+        }
+        #databaseweather{
+            width:90%;
+            background-color:#fff;
+            margin:0 auto;
+            text-align: center;
+            padding:10px 0px 10px 0px;
+            padding-top: 10%;
+
+        }
+        #visitors{
+            padding-top: 5%;
+        }
+
+        span{
+            font-weight: bold;
+            color:#003399;
+
+        }
+
+        h2{
+            font-weight: bold;
+            color:#003399;
+
+        }
+        h1{
+            color:#003399;
+
+        }
+        #checkweather{
+            padding-bottom: 2%;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            var ipaddress = [[${ipaddress}]];
+            document.getElementById('ipaddresses').innerHTML='Your external IP Address is ' + ipaddress;
+
+        });
+
+
+    </script>
+
+
+    <script th:inline="javascript" type="text/javascript">
+        var latitude = [[${latitude}]];
+        var longtitude = [[${longtitude}]];
+        var ipaddress = [[${ipaddress}]];
+
+        var myCenter=new google.maps.LatLng(latitude,longtitude);
+
+        function initialize()
+        {
+            var mapProp = {
+                center:myCenter,
+                zoom:15,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            var marker=new google.maps.Marker({
+                position:myCenter,
+                animation: google.maps.Animation.BOUNCE
+            });
+
+            marker.setMap(map);
+
+            google.maps.event.addListener(marker,'click',function() {
+                map.setZoom(16);
+                map.setCenter(marker.getPosition());
+                animation:google.maps.Animation.BOUNCE;
+
+            });
+
+            google.maps.event.addListener(marker,'click',function() {
+                var infowindow = new google.maps.InfoWindow({
+                    content:"YOUR EXTERNAL IP ADDRESS " + ipaddress + " SERVER  LOCATES HERE " +"<br/>"+ latitude +"<br/>" + longtitude+"<br/>"
+                });
+                infowindow.open(map,marker);
+            });
+
+
+        }
+
+
+//        function newLocation(newLat,newLng)
+//        {
+//            map.setCenter({
+//                lat : newLat,
+//                lng : newLng
+//            });
+//        }
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+    <script th:inline="javascript" type="text/javascript">
+
+
+        function initialize2(lat,long)
+
+        {
+
+            var myCenter2=new google.maps.LatLng(lat,long);
+//            document.getElementById("googleMap2").style.visibility="visible";
+
+
+
+
+//            document.getElementById("onmapheader").style.display="block";
+            document.getElementById("googleMap2").style.display = "block";
+            var mapProp2 = {
+                center:myCenter2,
+                zoom:5,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            var map2=new google.maps.Map(document.getElementById("googleMap2"),mapProp2);
+
+            var marker2=new google.maps.Marker({
+                position:myCenter2,
+                animation: google.maps.Animation.BOUNCE
+            });
+
+            marker2.setMap(map2);
+
+            google.maps.event.addListener(marker2,'click',function() {
+                map2.setZoom(16);
+                map2.setCenter(marker2.getPosition());
+                animation:google.maps.Animation.BOUNCE;
+
+            });
+
+            google.maps.event.addListener(marker2,'click',function() {
+                var infowindow = new google.maps.InfoWindow({
+                    content:"YOUR SERVER LOCATES HERE " +"<br/>"+ latitude +"<br/>" + longtitude
+                });
+                infowindow.open(map2,marker2);
+            });
+
+            window.location = (""+window.location).replace(/#[A-Za-z0-9_]*$/,'')+"#checkonmap";
+
+
+        }
+
+
+//        google.maps.event.addDomListener(window, 'load', initialize2);
+    </script>
+    <script type="text/javascript" th:inline="javascript">
+
+        //        var latitude = [[${latitude}]];
+        //        var longtitude = [[${longtitude}]];
+        //        alert(latitude);
+        //
+        //        alert(longtitude);
+        //        alert("sdffsf");
+    </script>
+    <script type="text/javascript" th:inline="javascript" >
+        https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text%3D%22(40.7141667%2C-74.0063889)%22%20and%20u%3D'c')&diagnostics=true
+
+                var ipaddress ;
+
+        $(document).ready(function(){
+ipaddress =  [[${ipaddress}]];
+            $.ajax({
+
+                url:'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text%3D%22('+latitude +'%2C'+longtitude+')%22)and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys', success: function(json_weather){
+
+                    $('<div class="center-block" style="color: #00bcd4;font-family:Helvetica;font-size:25px;font-weight: bold">').text('NAT external server IP address '+ipaddress).appendTo('#mainweather');
+                    $('<div class="center-block" style="color: #00bcd4;font-family:Helvetica;font-size:30px;font-weight: bold">').text(json_weather.query.results.channel.title).appendTo('#mainweather');
+                    $('<span>').text('Main weather : ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.item.condition.text+"<br/><br/>");
+                    $('<span>').text('Temperature: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.item.condition.temp+"<br/><br/>");
+                    $('<span>').text('Date: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.item.condition.date+"<br/><br/>");
+
+                    $('<span >').text('latitude: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.item.lat + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('longtitude: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.item.long+"<br/><br/>");
+
+
+
+                    $('<span>').text('Wind Chill: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.wind.chill + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Wind direction: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.wind.direction + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Wind speed: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.wind.speed+"<br/><br/>");
+                    $('<span>').text('Humidity: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.atmosphere.humidity + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Atmosphere Pressure: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.atmosphere.pressure + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Visibility : ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.atmosphere.visibility +"<br/><br/>");
+                    $('<span>').text('Atronomic Sunrise: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.astronomy.sunrise + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Atronomic Sunset: ').appendTo('#mainweather');
+                    $('#mainweather').append(json_weather.query.results.channel.astronomy.sunset + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+
+                }
+
+            });
+      });
+
+
+    </script>
+
+    <script type="text/javascript"  >
+
+        function checkweather(lat,long) {
+
+//            window.location = (""+window.location).replace(/#[A-Za-z0-9_]*$/,'')+"#end";
+            document.body.scrollIntoView(false);
+
+//            $('#googleMap').removeClass('col-md-12');
+//            $('#googleMap').addClass('col-md-6');
+            $.ajax({
+                url:'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text%3D%22('+lat +'%2C'+long+')%22)and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys', success: function(json_weather){
+
+                    $('<h2>').text('').appendTo('#databaseweather');
+                    $('#databaseweather').html('');
+
+                    $('<h1>').text(json_weather.query.results.channel.title ).appendTo('#databaseweather');
+
+
+                    $('<span>').text('Main weather : ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.item.condition.text+"<br/><br/>");
+                    $('<span>').text('Temperature: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.item.condition.temp+"<br/><br/>");
+                    $('<span>').text('Date: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.item.condition.date+"<br/><br/>");
+
+                    $('<span >').text('latitude: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.item.lat + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('longtitude: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.item.long+"<br/><br/>");
+
+
+
+                    $('<span>').text('Wind Chill: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.wind.chill + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Wind direction: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.wind.direction + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Wind speed: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.wind.speed+"<br/><br/>");
+                    $('<span>').text('Humidity: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.atmosphere.humidity + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Atmosphere Pressure: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.atmosphere.pressure + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Visibility : ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.atmosphere.visibility +"<br/><br/>");
+                    $('<span>').text('Atronomic Sunrise: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.astronomy.sunrise + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    $('<span>').text('Atronomic Sunset: ').appendTo('#databaseweather');
+                    $('#databaseweather').append(json_weather.query.results.channel.astronomy.sunset + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                }
+
+            });
+
+
+
+            return false;
+        }
+
+    </script>
+    <script  type="text/xml" src="https://query.yahooapis.com/v1/public/yql?q=select atmosphere from weather.forecast where woeid in (SELECT woeid FROM geo.places WHERE text='(51.514206,-0.09309387)')&;format=json&;callback=callbackFunction3"></script>
+
+<script>
+    function initialize3(id) {
+        alert(id);
+    }
+</script>
+<!--geoend-->
+    <script>
+        function getPropId(inputID){ alert(inputID); }
+    </script>
+    <script>
+        function getPropId2(longtitude,lat) {
+            alert(longtitude + lat);
+        }
+    </script>
+
+</head>
+<body data-spy="scroll" data-target=".navbar"  id="hometown">
+
+<!--/*/ <th:block th:include="fragments/headermainpage :: header"></th:block> /*/-->
+
+<div id="mapcontainer" class="row center-block">
+
+    <div class="col-md-6" id="googleMap" style="height:400px; border: hidden; "></div>
+    <div class="col-md-6" id="mainweather"></div>
+
+</div>
+
+<div class="row">
+</div>
+
+
+
+
+
+
+<!--<form   method="post" th:action="@{/}" th:object="${newVisitor}" enctype="multipart/form-data" id="carform" class="form-horizontal" >-->
+
+
+    <!--</form>-->
+<!--<script type="text/javascript" >-->
+
+    <!--function senddata() {-->
+
+        <!--confirm("sure");-->
+
+     <!--document.getElementById('carform').submit(function () {-->
+     <!--});-->
+
+
+
+           <!--}-->
+    <!--</script>-->
+
+<div class="table-responsive center-block" style="margin: 1%" id="visitors">
+    <table class="table table-condensed"
+           data-toggle="table"
+           data-classes="table table-hover table-condensed"
+           data-striped="true"
+           data-sort-name="id"
+           data-sort-order="asc"
+           data-pagination="true"
+           data-search="description"
+           data-order="id"
+
+    >
+        <caption ><h3><b>APP VISITORS</b></h3></caption>
+        <!--<tr class="w3-pale-blue">-->
+        <thead class="panel panel-primary" style="background-color:lightgrey">
+        <th data-field="id" data-sortable="true">ID</th>
+        <th data-field="ipAddress" data-sortable="true"><b>IP ADDRESS</b><br/><b>NAT EXTERNAL</b></th>
+        <th data-field="countryCode" data-sortable="true"><b>code</b></th>
+        <th data-field="countryName" data-sortable="true"><b>country</b></th>
+        <th data-field="region" data-sortable="true"><b>region</b></th>
+        <th data-field="regionName" data-sortable="true"><b>region</b><br/><b> name</b></th>
+        <th data-field="city" data-sortable="true"><b>city</b></th>
+        <th data-field="postalCode" data-sortable="true"><b>postal</b><br/><b>code</b></th>
+        <th data-field="latitude" data-sortable="true"><b>latitude</b></th>
+        <th data-field="longtitude" data-sortable="true"><b>longtitude</b></th>
+        <th data-field="visitedAt" data-sortable="true"><b>visited at</b></th>
+        <th><b>ACTION</b></th>
+        <!--<th data-field="mapa" data-sortable="true"><b>on map</b></th>-->
+
+
+        </thead>
+        <!--</tr>-->
+        <tbody id="myTable">
+
+        <tr th:each="visitor  : ${visitors}"  >
+            <td th:text="${visitor.id}"></td>
+            <!--<td th:text="${task.completed}"></td>-->
+            <!--<td>-->
+            <!--<form th:method="put" th:action="@{/}">-->
+            <!--&lt;!&ndash;<input type="hidden" name="id" th:value="${task.id}" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="hidden" name="description" th:value="${task.description}" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="hidden" name="description" th:value="${task.taskPriority}" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="hidden" name="description" th:value="${task.taskStatus}" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="hidden" name="description" th:value="${task.createdAt}" />&ndash;&gt;-->
+
+            <!--<input type="checkbox" name="completed" th:checked="${task.completed}" onchange="form.submit()" />-->
+            <!--</form>-->
+            <!--</td>-->
+            <td th:text="${visitor.ipAddress}"></td>
+            <td th:text="${visitor.countryCode}"></td>
+            <td th:text="${visitor.countryName}"></td>
+            <td th:text="${visitor.region}"></td>
+            <td th:text="${visitor.regionName}"></td>
+            <td th:text="${visitor.city}"></td>
+            <td th:text="${visitor.postalCode}"></td>
+            <td  th:text="${visitor.latitude}"></td>
+            <td th:text="${visitor.longtitude}"></td>
+            <td th:text="${visitor.visitedAt}"></td>
+            <td >
+                <div >
+                    <form th:method="delete" th:action="@{/}">
+                        <input type="hidden" name="id" th:value="${visitor.id}" />
+                        <button class="btn btn-default " type="submit" style="text-align:center;width: auto;margin-left: auto;background-color:mistyrose " onclick="return confirm(' Delete visitor statistics from database ? Are You shure ?')" >Delete</button>
+                    </form>
+                </div>
+                <div ><input class="btn btn-default btn-block " id ="addToMapContainer" type="button" value="geolocation" th:onclick="'initialize2(\'' + ${visitor.latitude} + '\',\''+ ${visitor.longtitude} + '\');'"/></div>
+                <div><input  class="btn btn-default btn-block" id ="checkweatherconditions" type="button" value="weather" th:onclick="'checkweather(\'' + ${visitor.latitude} + '\',\''+ ${visitor.longtitude} + '\');'"/></div>
+            </td>
+            <!--<td>-->
+                <!--&lt;!&ndash;<a href="#" th:onclick="'javascript:dataSearchAjax1(\'' + ${visitor.latitude} +'\',\''+ ${visitor.longtitude} + '\');'">tt</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="#" role="button" class="green" data-toggle="" onclick="dataSearchAjax1('Source','sourceResultDiv')">view</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<input th:value="${visitor.latitude}" class="button" name="Edit" type="button" value="Edit" onclick="getPropId(value)"/>&ndash;&gt;-->
+                <!--<input id ="addToMapContainer" type="button" value="show on map" th:onclick="'initialize2(\'' + ${visitor.latitude} + '\',\''+ ${visitor.longtitude} + '\');'"/>-->
+
+            <!--</td>-->
+            <!--<td>-->
+                <!--&lt;!&ndash;<a href="#" th:onclick="'javascript:dataSearchAjax1(\'' + ${visitor.latitude} +'\',\''+ ${visitor.longtitude} + '\');'">tt</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="#" role="button" class="green" data-toggle="" onclick="dataSearchAjax1('Source','sourceResultDiv')">view</a>&ndash;&gt;-->
+                <!--<input id ="checkweatherconditions" type="button" value="weather" th:onclick="'checkweather(\'' + ${visitor.latitude} + '\',\''+ ${visitor.longtitude} + '\');'"/>-->
+
+            <!--</td>-->
+            <!--<td>-->
+                <!--<div   >-->
+                    <!--<form th:method="put" th:action="@{/}">-->
+                        <!--<input type="hidden" name="id" th:value="${task.id}" />-->
+                        <!--<input type="hidden" name="description" th:value="${task.description}" />-->
+                        <!--<input type="hidden" name="taskPriority" th:value="${task.taskPriority}" />-->
+                        <!--<input type="hidden" name="taskStatus" th:value="${task.taskStatus}" />-->
+                        <!--<input type="hidden" name="email" th:value="${task.email}" />-->
+                        <!--<input type="hidden" name="dueTo" th:value="${task.dueTo}" />-->
+
+
+                        <!--<input type="checkbox" name="completed" th:checked="${task.completed}" onchange="form.submit()" />-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--&lt;!&ndash;<input type="checkbox" name="completed" th:checked="${task.completed}" onchange="form.submit()" />&ndash;&gt;-->
+
+            <!--</td>-->
+
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+<!--<button id="mapfromdatabasebutton">Close/Open map</button>-->
+
+<div id="checkonmap" class="row center-block">
+
+    <div  class="col-md-12 center-block" id="googleMap2" style="height:400px; border: hidden; "></div>
+
+</div>
+<!--<button id="weathereportbutton"> Close/Open weather report</button>-->
+
+<div id="checkweather" class="row center-block">
+    <div class="col-md-12" id="databaseweather"></div>
+
+</div>
+<a id="end"></a>
+</body>
+</html>

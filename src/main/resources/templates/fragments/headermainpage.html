@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:pages="https://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Title</title>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8;width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css"/>-->
+
+
+    <!--migrating to bootstrap dublicated-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+
+
+</head>
+<body >
+<!--<div class="w3-container">-->
+<!--<div th:fragment="header" >-->
+    <!--<ul class="w3-navbar w3-light-grey w3-card-8 navbar-fixed-top " style="margin: 1%;text-align: center">-->
+        <!--<li><img src="../../static/images/time_manager.jpg" class="w3-round" width="200" height="70" style="align-self: stretch;display: inline-block"-->
+                 <!--th:src="@{/images/time_manager.jpg}" /></li>-->
+        <!--<li><h4 th:inline="text" style="margin-left: 50px;display: inline-block"  > Task manager: <b style="color: #4CAF50">[[${#httpServletRequest.remoteUser}]]!</b> </h4></li>-->
+        <!--<li class="w3-right" ><form th:action="@{/logout}" method="post"   >-->
+            <!--<input type="submit" value="Sign Out" style="background-color:lightblue; text-align: center;margin-right: 5px"/>-->
+        <!--</form></li>-->
+
+        <!--<li class="w3-right active"><a href="tasks.html" th:href="@{/}"><h5 style="text-align: center;display: inline-block">HOME</h5></a></li>-->
+        <!--<li class="w3-right"><a href="charts.html" th:href="@{/charts}"><h5 style="text-align: center;display: inline-block">CHARTS</h5></a></li>-->
+        <!--<li class="w3-right"><a href="rombspolars.html" th:href="@{/rombspolars}"><h5 style="text-align: center;display: inline-block">DETAILED GRAPHS</h5></a></li>-->
+        <!--<li class="w3-right"> <a href="#current_tasks" ><h5 style="text-align: center;display: inline-block">CURRENT TASKS LIST</h5></a></li>-->
+
+
+
+
+    <!--</ul>-->
+
+<!--</div>-->
+
+<!--</div>-->
+<!--<div th:fragment="header">-->
+<!--<nav class="navbar navbar-default ">-->
+
+<!--<div class="container-fluid">-->
+<!--<div class="navbar-header ">-->
+<!--&lt;!&ndash;<a class="navbar-brand" href="#">WebSiteName</a>&ndash;&gt;-->
+<!--<div class="navbar-brand"><img src="../../static/images/time_manager.jpg" class="w3-round" width="200" height="70" style="align-self: inherit"-->
+<!--th:src="@{/images/time_manager.jpg}" /></div>-->
+<!--</div>-->
+<!--<ul class="nav navbar-nav">-->
+<!--&lt;!&ndash;<li><img src="../../static/images/time_manager.jpg" class="w3-round" width="200" height="80" style="float: left"&ndash;&gt;-->
+<!--&lt;!&ndash;th:src="@{/images/time_manager.jpg}" /></li>&ndash;&gt;-->
+<!--<li> <h6 th:inline="text"  > Task manager: <b style="color: #4CAF50">[[${#httpServletRequest.remoteUser}]]!</b> </h6></li>-->
+<!--<li><a href="charts.html" th:href="@{/charts}"><h6>DETAILED CHARTS</h6></a>-->
+<!--</li>-->
+<!--<li class="active"><a href="tasks.html" th:href="@{/}"><h6>HOME</h6></a></li>-->
+
+<!--<ul class="nav navbar-nav navbar-right">-->
+<!--<li><form th:action="@{/logout}" method="post"  >-->
+<!--<input type="submit" value="Sign Out" style="background-color:lightblue "/>-->
+<!--</form>-->
+<!--</li>-->
+<!--</ul>-->
+
+
+
+<!--</ul>-->
+<!--</div>-->
+<!--</nav>-->
+<!--</div>-->
+<div th:fragment="header">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!--<img src="../../static/images/time_manager.jpg" class="img-responsive " width="200" style="align-self: stretch;display: inline-block"-->
+                     <!--th:src="@{images/time_manager.jpg}" />    <h4 th:inline="text" style="margin-left: 5px;display: inline-block;text-align: center;align-content: center"  > Task manager: <b style="color: #4CAF50">[[${#httpServletRequest.remoteUser}]]!</b> </h4>     -->
+                <!--<img src="../static/images/time_manager.jpg"  th:src="@{images/time_manager.jpg}"   class="img-responsive"  width="200" style="align-self: stretch;display: inline-block"/>-->
+
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li><img src="https://engineersview.files.wordpress.com/2013/07/find-ip-trace-ip-address-track.gif"  height="50px"></li>
+                <li><img src="http://tapoueh.org/images/geolocation-clic.png" height="50px"/></li>
+                <li > <a href="#" ><h5 style="text-align: center;display: inline-block">HOME</h5></a></li>
+                <li > <a href="#visitors" ><h5 style="text-align: center;display: inline-block">VISITORS LIST</h5></a></li>
+                <li > <a href="#" ><h5 style="text-align: center;display: inline-block">YOUR LOCAL WEATHER CONDITIONS</h5></a></li>
+
+
+
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><h5>SOCIAL<span class="caret"></span></h5> </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://uk.linkedin.com/pub/anton-syzko/123/9ab/b70">Linked In</a></li>
+                        <li><a href="https://github.com/AntonSyzko/doctoradministrationpanel">This Project On GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button class="btn btn-default " type="button" onclick="senddata()">SAVE TO DATABASE</button>
+                    <form   method="post" th:action="@{/}" th:object="${newVisitor}" enctype="multipart/form-data" id="carform" class="form-horizontal" >
+                    </form>
+                    <script type="text/javascript" >
+                        function senddata() {
+                            confirm("sure");
+                            document.getElementById('carform').submit();
+                        }
+                    </script>
+                </li>
+                <li>
+                    <form th:action="@{/logout}" method="post"   >
+                        <input type="submit" value="Sign Out" style="background-color:lightblue; text-align: center;margin-right: 5px;"/>
+                    </form>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <div th:if="${visitorhasalreadybeeregisteredmessage}" class="row center-block" style="font-weight: bold;font-size: large;color: red; display: table;margin-right: auto;margin-left: auto;">
+        <b th:text="${visitorhasalreadybeeregisteredmessage}"/>
+    </div>
+    <div th:if="${deleted}"class="row center-block" style="font-weight: bold;font-size: large;color: green; display: table;margin-right: auto;margin-left: auto;">
+        <b th:text="${deleted}"/>
+    </div>
+
+</div>
+
+
+</body>
+</html>
