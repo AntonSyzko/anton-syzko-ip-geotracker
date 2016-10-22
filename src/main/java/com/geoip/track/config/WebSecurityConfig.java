@@ -93,8 +93,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             User userDetails = new User("test", encoder.encode("test"), authorities);
             User userDetails2 = new User("admin", encoder.encode("admin"), authorities);
 
-           userDetailsService.createUser(userDetails);
-           userDetailsService.createUser(userDetails2);
+//            userDetailsService.createUser(userDetails);
+//            userDetailsService.createUser(userDetails2);
         }
     }
 
