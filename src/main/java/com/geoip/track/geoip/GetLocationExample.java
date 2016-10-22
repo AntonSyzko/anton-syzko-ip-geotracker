@@ -20,43 +20,43 @@ import java.net.UnknownHostException;
 
 public class GetLocationExample {
 
-    public static void main(String[] args) {
+//     public static void main(String[] args) {
 
-        InetAddress ipAddr = null;
-        String ipAddrFromJava = null;
-        try {
-            ipAddr = InetAddress.getLocalHost();
-            System.out.println("my internal IP from pure  java "+ ipAddr.getHostAddress());
-            ipAddrFromJava = ipAddr.getHostAddress();
-            System.out.println(ipAddrFromJava);
-        } catch (UnknownHostException ex) {
-            ex.printStackTrace();
-        }
-
-
+//         InetAddress ipAddr = null;
+//         String ipAddrFromJava = null;
+//         try {
+//             ipAddr = InetAddress.getLocalHost();
+//             System.out.println("my internal IP from pure  java "+ ipAddr.getHostAddress());
+//             ipAddrFromJava = ipAddr.getHostAddress();
+//             System.out.println(ipAddrFromJava);
+//         } catch (UnknownHostException ex) {
+//             ex.printStackTrace();
+//         }
 
 
-        BufferedReader br = null;
-        String myIP = null;
-        try {
-            URL url = new URL("http://checkip.amazonaws.com/");
-
-            br = new BufferedReader(new InputStreamReader(url.openStream()));
-            myIP = br.readLine();
-            System.out.println(myIP);
-            //System.out.println(br.readLine());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
-        GetLocationExample obj = new GetLocationExample();
+//         BufferedReader br = null;
+//         String myIP = null;
+//         try {
+//             URL url = new URL("http://checkip.amazonaws.com/");
 
-        ServerLocation location = obj.getLocation(myIP);
-        System.out.println(location.getCountryName());
-        System.out.println(location);
-    }
+//             br = new BufferedReader(new InputStreamReader(url.openStream()));
+//             myIP = br.readLine();
+//             System.out.println(myIP);
+//             //System.out.println(br.readLine());
+
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
+
+
+//         GetLocationExample obj = new GetLocationExample();
+
+//         ServerLocation location = obj.getLocation(myIP);
+//         System.out.println(location.getCountryName());
+//         System.out.println(location);
+//     }
 
     public ServerLocation getLocation(String ipAddress) {
 
