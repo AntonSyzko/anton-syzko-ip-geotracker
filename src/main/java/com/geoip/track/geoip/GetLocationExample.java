@@ -63,7 +63,7 @@ public class GetLocationExample {
 //        File file = new File(
 //                "D:\\IdeaProjects\\CountiresToChart\\src\\main\\java\\com\\example\\springrestchart\\geoip\\GeoLiteCity.dat");
         ClassPathResource cpt = new ClassPathResource("static/GeoLiteCity.dat");
-          File file2 = new File("https://github.com/RDXT/heroku-buildpack-geolite.git");
+          File file2 = new File("https://github.com/AntonSyzko/anton-syzko-ip-geotracker/blob/master/src/main/resources/static/GeoLiteCity.dat");
 
         File file = null ;
         try {
