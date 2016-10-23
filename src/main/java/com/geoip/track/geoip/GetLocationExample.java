@@ -64,6 +64,8 @@ public class GetLocationExample {
 //                "D:\\IdeaProjects\\CountiresToChart\\src\\main\\java\\com\\example\\springrestchart\\geoip\\GeoLiteCity.dat");
         ClassPathResource cpt = new ClassPathResource("static/GeoLiteCity.txt");
           File file2 = new File("https://github.com/AntonSyzko/anton-syzko-ip-geotracker/blob/master/src/main/resources/static/GeoLiteCity.dat");
+                  File file3 = new File("http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz");
+
 
         File file = null ;
         try {
@@ -72,7 +74,7 @@ public class GetLocationExample {
             e.printStackTrace();
         }
 
-        return getLocation(ipAddress, file2);
+        return getLocation(ipAddress, file3);
 
     }
 
