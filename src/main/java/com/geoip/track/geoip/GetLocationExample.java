@@ -72,7 +72,7 @@ public class GetLocationExample {
             e.printStackTrace();
         }
 
-        return getLocation(ipAddress, file);
+        return getLocation(ipAddress, file2);
 
     }
 
