@@ -1,6 +1,5 @@
-package com.antonsyzko.geotracker;
+package com.geoip.track;
 
-import com.antonsyzko.geotracker.geoip.ServerLocation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
