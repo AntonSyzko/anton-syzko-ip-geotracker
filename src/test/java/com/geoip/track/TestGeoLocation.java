@@ -1,6 +1,6 @@
-package com.antonsyzko.geotracker;
+package com.geoip.track;
 
-import com.antonsyzko.geotracker.geoip.ServerLocation;
+import com.geoip.track.geoip.ServerLocation;
 import com.maxmind.geoip.Location;
 import com.maxmind.geoip.LookupService;
 import com.maxmind.geoip.regionName;
