@@ -1,7 +1,5 @@
-package com.antonsyzko.geotracker;
+package com.geoip.track;
 
-import com.antonsyzko.geotracker.geoip.GetLocationExample;
-import com.antonsyzko.geotracker.geoip.ServerLocation;
 import org.junit.Test;
 
 import java.io.BufferedReader;
